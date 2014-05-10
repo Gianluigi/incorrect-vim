@@ -153,21 +153,27 @@ set novisualbell
 " MinBufExplorer plugin
 """"""""""""""""""""""""""""""""""""""""""
 
-map <leader>e :MBEOpen<cr> 
-map <leader>c :MBEClose<cr> 
+map <leader>o :MBEOpen<cr> 
 map <leader>t :MBEToggle<cr> 
 
 " buffer navigation
 nmap <leader>. :MBEbn<cr>
 nmap <leader>m :MBEbp<cr>
 nmap <leader>d :MBEbd<cr>
-nmap <leader>f :MBEFocus<cr>
+nmap <leader>t :MBEFocus<cr>
 
 """"""""""""""""""""""""""""""""""""""""""
 " CtrlP  plugin
 """"""""""""""""""""""""""""""""""""""""""
 
-map <leader>p :CtrlP<cr> 
+" mapping for opening a file on disk
+map <leader>p :CtrlP<cr>
+
+" Mapping for findind files, buffer, or MRU
+map <leader>f :CtrlPMixed<cr>
+
+" search for an open buffer
+map <leader>fb :CtrlPBuffer<cr>
 
 
 " To enable the saving and restoring of screen positions.
