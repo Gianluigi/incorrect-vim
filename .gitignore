@@ -1,0 +1,4 @@
+# The plugin installation/update is handled via bundle
+# so ignore the bundle directory
+bundle/**
+
