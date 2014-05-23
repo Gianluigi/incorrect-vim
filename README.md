@@ -1,5 +1,5 @@
 A modular VIM configuration 
-=================
+===========================
 
 I'm using VIM for a while, and I looked for a way to have a modular configuration
 simple to manage, thet lets me experiments with different plugins, so being able
@@ -22,7 +22,7 @@ sh ~/.incorrect-vim
 # Update
 Update plugins via the [Vundle] Command: :PluginUpdate simple as it is !
 
-Update the vimrc via a git rebase:
+Update the main vimrc configuration via a git rebase:
 
     git ~/.incorrect-vim
     git pull --rebase
