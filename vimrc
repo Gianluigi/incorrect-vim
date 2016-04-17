@@ -129,6 +129,8 @@ set expandtab
 set smarttab
 set number 
 
+
+
 " UTF-8 encoding
 set encoding=utf8 
 
@@ -146,6 +148,7 @@ set wildmenu
 set showmode
 
 set noerrorbells
+
 set novisualbell
 
 
