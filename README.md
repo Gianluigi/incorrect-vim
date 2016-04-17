@@ -17,7 +17,7 @@ and run the install.sh script to install your new vim configuration
 
 ```bash
 git clone git://github.com/gianluigi/incorrect-vim ~/.incorrect-vim
-sh ~/.incorrect-vim
+sh ~/.incorrect-vim/install.sh
 ```  
 # Update
 Update plugins via the [Vundle] Command: :PluginUpdate simple as it is !
