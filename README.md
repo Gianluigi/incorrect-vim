@@ -19,6 +19,9 @@ and run the install.sh script to install your new vim configuration
 git clone git://github.com/gianluigi/incorrect-vim ~/.incorrect-vim
 sh ~/.incorrect-vim/install.sh
 ```  
+Please note: the script will clone the vundle submodule and start vim in order to download all the plugins configured in the vimrc. The very first time it starts it will complain for some missing files, but that's because we're starting it exactly to repair the situation !
+
+
 # Update
 Update plugins via the [Vundle] Command: :PluginUpdate simple as it is !
 

@@ -12,6 +12,10 @@ echo "set rtp+=$SCRIPT_PATH/bundle/vundle/" >> ~/.vimrc
 echo "source $SCRIPT_PATH/vimrc" >> ~/.vimrc
 cp $SCRIPT_PATH/gvimrc ~/.gvimrc
 
-git clone https://github.com/VundleVim/Vundle.vim.git ~$SCRIPT_PATH/bundle/vundle
+# install vundle as a git submodule 
+cd $SCRIPT_PATH 
+git submodule init
+git submodule update
+
 # install plugins with vundle via command line
 vim +PluginInstall +qall
