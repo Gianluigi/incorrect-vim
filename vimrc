@@ -13,8 +13,8 @@
 " Setup Vundle to keep a clean enviroment 
 """"""""""""""""""""""""""""""""""""""""""
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible              
+filetype off                 
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.incorrect-vim/bundle/vundle/
@@ -25,16 +25,25 @@ call vundle#begin(path)
 "
 " " let Vundle manage Vundle, required
 Bundle 'gmarik/vundle'
+
 "
 " " The following are examples of different formats supported.
 " " Keep bundle commands between here and filetype plugin indent on.
 " " scripts on GitHub repos
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
-Bundle 'fholgado/minibufexpl.vim'
+" Bundle 'fholgado/minibufexpl.vim'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'junegunn/goyo.vim'
-Bundle 'amix/vim-zenroom2'
+Bundle 'fatih/vim-go' 
+Bundle 'posva/vim-vue'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+Plugin 'rstacruz/sparkup'
 
 "Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'tpope/vim-rails.git'
@@ -77,14 +86,17 @@ filetype plugin on
 set nobackup
 set nowb
 set noswapfile
+set hidden 
+set modelines=0
+set autowrite
 
 " With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
+" like <leader>s saves the current file
 let mapleader = ","
 let g:mapleader = ","
 
 " Fast saving
-nmap <leader>w :w!<cr>
+nmap <leader>s :w!<cr>
 
 " Source the vimrc file after saving it
 if has("autocmd")
@@ -92,11 +104,17 @@ if has("autocmd")
 endif
 
 "fast edit to vimrc
-nmap <leader>v :e ~/.incorrect-vim/vimrc<cr>
+nmap <leader>ev :e ~/.incorrect-vim/vimrc<cr>
+
+" reselect the text just pasted
+nnoremap <leader>v V`]
 
 "Map Copy & Paste to system clipboard
 vnoremap <C-c> "+y
 vnoremap <C-v> "+p
+
+" Quicker escapingfrom normal mode
+inoremap jj <ESC>
 
 """"""""""""""""""""""""""""""""""""""""""
 " Color and Fonts settings
@@ -125,45 +143,89 @@ syntax on
 set smartindent
 set shiftwidth=4
 set tabstop=4
+set softtabstop=4
 set expandtab
 set smarttab
 set number 
-
+set autoindent
+set scrolloff=3
 
 
 " UTF-8 encoding
 set encoding=utf8 
 
 " Search options
+nnoremap / /\v
+vnoremap / /\v
+set smartcase
+set gdefault
 set incsearch
+set showmatch
 set ignorecase
 
 set hlsearch "Highlight search things
-
+nnoremap <leader><space> :noh<cr>
+nnoremap <tab> %
+vnoremap <tab> %
 
 " Show autocomplete menus
 set wildmenu
+set wildmode=list:longest
 
 " Show editing mode
 set showmode
-
 set noerrorbells
+set visualbell
+set showcmd
+set cursorline
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set laststatus=2
+set relativenumber
+set undofile
 
-set novisualbell
+" long lines hanling
+set wrap
+set textwidth=79
+set formatoptions=qrn1
+set colorcolumn=85
 
+" disable arrow keys, to force the abit of using hjkl for movement
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
+
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
+" split windows mapping
+nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 """"""""""""""""""""""""""""""""""""""""""
-" MinBufExplorer plugin
+" Airline plugin
 """"""""""""""""""""""""""""""""""""""""""
 
-map <leader>o :MBEOpen<cr> 
-map <leader>t :MBEToggle<cr> 
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='solarized'
+let g:airline_solarized_bg='dark'
 
 " buffer navigation
-nmap <leader>. :MBEbn<cr>
-nmap <leader>m :MBEbp<cr>
-nmap <leader>d :MBEbd<cr>
-nmap <leader>t :MBEFocus<cr>
+nmap <leader>l :bn<cr>
+nmap <leader>k :bp<cr>
+nmap <leader>d :bd<cr>
 
 """"""""""""""""""""""""""""""""""""""""""
 " CtrlP  plugin
@@ -178,6 +240,12 @@ map <leader>f :CtrlPMixed<cr>
 " search for an open buffer
 map <leader>fb :CtrlPBuffer<cr>
 
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$|\v[\/]node_modules$|\v[\/]test$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'example_some_bad_symbolic_links',
+  \ }
+
 
 " To enable the saving and restoring of screen positions.
  let g:screen_size_restore_pos = 1
@@ -189,4 +257,43 @@ let g:screen_size_by_vim_instance = 0
 
 
 
+""""""""""""""""""""""""""""""""""""""""""
+" NERDTree  plugin
+""""""""""""""""""""""""""""""""""""""""""
+map <leader>n :NERDTreeToggle<CR>
 
+""""""""""""""""""""""""""""""""""""""""""
+" Sparkup  plugin
+""""""""""""""""""""""""""""""""""""""""""
+augroup sparkup_types
+  " Remove ALL autocommands of the current group.
+  autocmd!
+  " Add sparkup to new filetypes
+  autocmd FileType vue,php runtime! ftplugin/html/sparkup.vim
+augroup END
+
+""""""""""""""""""""""""""""""""""""""""""
+" Vim-go  plugin
+""""""""""""""""""""""""""""""""""""""""""
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>c :cclose<CR>
+
+let g:go_fmt_command = "goimports"
+
+autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+autocmd FileType go nmap <leader>t :GoTest<cr>
+autocmd FileType go nmap <leader>g :GoTestCompile<cr>
+autocmd FileType go nmap <leader>a :GoAlternate<cr>
+
+""""""""""""""""""""""""""""""""""""""""""
+" UltiSnip plugin
+""""""""""""""""""""""""""""""""""""""""""
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"

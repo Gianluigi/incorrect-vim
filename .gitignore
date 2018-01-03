@@ -2,3 +2,4 @@
 # so ignore the bundle directory
 bundle/**
 
+*.un~
